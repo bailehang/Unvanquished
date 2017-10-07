@@ -193,8 +193,9 @@ vmCvar_t           g_instantBuilding;
 
 vmCvar_t           g_emptyTeamsSkipMapTime;
 
-Cvar::Cvar<bool>   g_neverEnd("g_neverEnd", "cheat to never end a game, helpful to load a map without spawn for testing purpose", Cvar::NONE, false);
+vmCvar_t           elo_startvalue;
 
+Cvar::Cvar<bool>   g_neverEnd("g_neverEnd", "cheat to never end a game, helpful to load a map without spawn for testing purpose", Cvar::NONE, false);
 // <bot stuff>
 
 // bot buy cvars
@@ -392,6 +393,8 @@ static cvarTable_t gameCvarTable[] =
 	{ &g_combatCooldown,              "g_combatCooldown",              "15",                               0,                                               0, false    , nullptr       },
 
 	{ &g_instantBuilding,             "g_instantBuilding",             "0",                                0,                                               0, true     , nullptr       },
+
+    { &elo_startvalue,                "elo_startvalue",                "1000",                             0,                                               0, false    , nullptr       },
 
 	{ &g_emptyTeamsSkipMapTime,       "g_emptyTeamsSkipMapTime",       "0",                                0,                                               0, true     , nullptr       },
 

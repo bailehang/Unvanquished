@@ -150,6 +150,12 @@ static const g_admin_cmd_t     g_admin_cmds[] =
 		N_("[^3name|slot#^7]")
 	},
 
+    {
+        "elo",          G_admin_elo,         false, "elo",
+        N_("print your Elo rating"),
+        ""
+    },
+
 	{
 		"flag",          G_admin_flag,       false, "flag",
 		N_("add an admin flag to a player, prefix flag with '-' to disallow the flag. "
@@ -846,6 +852,8 @@ void G_admin_writeconfig()
 		admin_writeconfig_int( a->counter, f );
 		trap_FS_Write( "lastseen = ", 11, f );
 		admin_writeconfig_int( a->lastSeen.tm_year * 10000 + a->lastSeen.tm_mon * 100 + a->lastSeen.tm_mday, f );
+		trap_FS_Write( "elo = ", 6, f );
+		admin_writeconfig_int( a->elo, f );
 		trap_FS_Write( "\n", 1, f );
 	}
 
@@ -1981,6 +1989,10 @@ bool G_admin_readconfig( gentity_t *ent )
 				a->lastSeen.tm_mon = ( tm / 100 ) % 100;
 				a->lastSeen.tm_mday = tm % 100;
 			}
+			else if ( !Q_stricmp( t, "elo" ) )
+			{
+				admin_readconfig_int( &cnf, &a->elo );
+			}
 			else
 			{
 				COM_ParseError( "[admin] unrecognized token \"%s\"", t );
@@ -2807,6 +2819,58 @@ bool G_admin_unban( gentity_t *ent )
 
 	G_admin_writeconfig();
 	return true;
+}
+
+int elo_get( g_admin_admin_t *a )
+{
+    if ( !a )
+    {
+        Log::Warn("WARN: elo_get called on bogus admin pointer");
+        return elo_startvalue.integer;
+    }
+
+    if ( !a->elo )
+    {
+        a->elo = elo_startvalue.integer;
+    }
+    return a->elo;
+}
+
+bool G_admin_elo( gentity_t *ent )
+{
+    gentity_t *target;
+    int argc = trap_Argc();
+    if ( argc < 2 )
+    {
+        // no target specified, assuming self
+        target = ent;
+    }
+    else
+    {
+        char tgtname[MAX_NAME_LENGTH];
+        trap_Argv(1, tgtname, sizeof(tgtname));
+        int tgtid;
+        char err[MAX_STRING_CHARS];
+        if ( ( tgtid = G_ClientNumberFromString( tgtname, err, sizeof( err ) ) ) == -1 )
+        {
+            ADMP( va ( "%s %s", QQ( N_("^3elo: ^7$1$") ), err ) );
+            return false;
+        }
+
+        target = &g_entities[tgtid];
+        ADMP( va ( "%s %d %s", QQ( N_("^Ddebug: ^7tgtid $1$, tgtname $2$") ),
+                   tgtid, tgtname ) );
+    }
+
+    if ( !target )
+    {
+        // doesn't work for console
+        return false;
+    }
+
+    AP( va ( "print_tr %s %s %d", QQ( N_("^3elo: ^7$1$^7's Elo rating is ^D$2$") ),
+             G_quoted_user_name( target, "a paranormal ghost" ), elo_get( target->client->pers.admin ) ) );
+    return true;
 }
 
 bool G_admin_adjustban( gentity_t *ent )

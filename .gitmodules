@@ -1,6 +1,6 @@
 [submodule "src/utils/cbse"]
 	path = src/utils/cbse
-	url = https://github.com/DaemonEngine/CBSE-Toolchain.git 
+	url = https://github.com/DaemonDevelopers/CBSE-Toolchain.git 
 [submodule "libs/libRocket"]
 	path = libs/libRocket
 	url = https://github.com/Unvanquished/libRocket.git
