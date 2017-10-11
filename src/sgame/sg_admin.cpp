@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "sg_local.h"
 #include "engine/qcommon/q_unicode.h"
+#include "sg_elo.h"
 
 static void G_admin_notIntermission( gentity_t *ent )
 {
@@ -2816,21 +2817,6 @@ bool G_admin_unban( gentity_t *ent )
 
 	G_admin_writeconfig();
 	return true;
-}
-
-int elo_get( g_admin_admin_t *a )
-{
-    if ( !a )
-    {
-        Log::Warn("WARN: elo_get called on bogus admin pointer");
-        return elo_startvalue.integer;
-    }
-
-    if ( !a->elo )
-    {
-        a->elo = elo_startvalue.integer;
-    }
-    return a->elo;
 }
 
 bool G_admin_elo( gentity_t *ent )

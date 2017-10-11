@@ -116,6 +116,7 @@ set(SGAMELIST
     ${GAMELOGIC_DIR}/sgame/sg_cm_world.h
     ${GAMELOGIC_DIR}/sgame/sg_combat.cpp
     ${GAMELOGIC_DIR}/sgame/sg_definitions.h
+    ${GAMELOGIC_DIR}/sgame/sg_elo.cpp
     ${GAMELOGIC_DIR}/sgame/sg_entities.cpp
     ${GAMELOGIC_DIR}/sgame/sg_entities.h
     ${GAMELOGIC_DIR}/sgame/sg_extern.h
