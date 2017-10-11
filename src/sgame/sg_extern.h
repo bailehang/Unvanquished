@@ -173,6 +173,7 @@ extern  vmCvar_t g_debugEntities;
 extern  vmCvar_t g_instantBuilding;
 
 extern  vmCvar_t elo_startvalue;
+extern  vmCvar_t elo_kfactor;
 
 // bot buy cvars
 extern vmCvar_t g_bot_buy;
