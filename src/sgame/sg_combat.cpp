@@ -435,6 +435,11 @@ void G_PlayerDie( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, in
 			                        Quote( killerName ),
 			                        (int)std::ceil(attacker->entity->Get<HealthComponent>()->Health()) ) );
 		}
+
+        if ( ! ( G_OnSameTeam(self, attacker) || attacker == self ) )
+        {
+            elo_calculate(attacker, self);
+        }
 	}
 	else if ( attacker->s.eType != entityType_t::ET_BUILDABLE )
 	{

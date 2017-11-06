@@ -44,6 +44,9 @@ along with Daemon Source Code.  If not, see <http://www.gnu.org/licenses/>.
 #include "sg_bot.h"
 #include "sg_entities.h"
 
+// elo
+#include "sg_elo.h"
+
 // struct definitions
 #include "sg_struct.h"
 
