@@ -3563,6 +3563,11 @@ static void CG_Rocket_DrawDownloadSpeed()
 	}
 }
 
+static void CG_Rocket_DrawTip()
+{
+    Rocket_SetInnerRML( "CG_Rocket_DrawTip is a stub", RP_EMOTICONS );
+}
+
 static void CG_Rocket_HaveJetpck()
 {
 	bool jetpackInInventory = BG_InventoryContainsUpgrade( UP_JETPACK, cg.snap->ps.stats );
@@ -3606,6 +3611,7 @@ static const elementRenderCmd_t elementRenderCmdList[] =
 	{ "progress_value", &CG_Rocket_DrawProgressValue, ELEMENT_ALL },
 	{ "spawnPos", &CG_Rocket_DrawSpawnQueuePosition, ELEMENT_DEAD },
 	{ "stamina_bolt", &CG_Rocket_DrawStaminaBolt, ELEMENT_HUMANS },
+    { "tip", &CG_Rocket_DrawTip, ELEMENT_ALL },
 	{ "tutorial", &CG_Rocket_DrawTutorial, ELEMENT_GAME },
 	{ "unlocked_items", &CG_Rocket_DrawPlayerUnlockedItems, ELEMENT_BOTH },
 	{ "votes", &CG_Rocket_DrawVote, ELEMENT_GAME },

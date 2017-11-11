@@ -72,6 +72,13 @@
 				display: block;
 				font-size: 1.5em;
 			}
+			
+            gametip {
+                position: absolute;
+				display: block;
+				font-size: 1.5em;
+                margin-top: 1.5em;
+			}
 
 			.trem-emoticon {
 				color: white;
@@ -89,6 +96,7 @@
 		<infobox>
 			<servername><hostname/></servername>
 			<servermotd><motd/></servermotd>
+            <gametip><tip/></gametip>
 		</infobox>
 
 		<percentage>
