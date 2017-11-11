@@ -34,6 +34,7 @@ Maryland 20850 USA.
 
 #include "cg_local.h"
 #include "rocket/rocket.h"
+#include <common/FileSystem.h>
 #include <Rocket/Core/Element.h>
 #include <Rocket/Core/ElementInstancer.h>
 #include <Rocket/Core/ElementInstancerGeneric.h>
@@ -3563,9 +3564,52 @@ static void CG_Rocket_DrawDownloadSpeed()
 	}
 }
 
+// FIXME: it might be wise to throw out the vector full of strings and
+//        only keep the chosen tip in memory
+static std::vector<std::string> tips;
+static int tip_choice;
+static bool tips_initialized = false;
+
+static void CG_Init_Tips()
+{
+    if ( tips_initialized ) { return; } // do only once per vm initialization
+
+    // make sure it exists
+    if ( FS::PakPath::FileExists("tips/default.txt") )
+    {
+        std::string infile = FS::PakPath::ReadFile("tips/default.txt");
+        std::string newtip;
+        size_t curpos = 0;
+        while ( ( curpos = infile.find('\n') ) != std::string::npos )
+        {
+            // split by \n
+            newtip = infile.substr(0, curpos);
+            tips.push_back(newtip);
+
+            // erase from buffer
+            infile.erase(0, curpos + 1);
+        }
+    }
+    
+    // TODO: per-map tips
+
+    tip_choice = rand() / (RAND_MAX / tips.size() + 1);
+    tips_initialized = true;
+}
+    
+
 static void CG_Rocket_DrawTip()
 {
-    Rocket_SetInnerRML( "CG_Rocket_DrawTip is a stub", RP_EMOTICONS );
+    CG_Init_Tips();
+
+    if ( tips.empty() )
+    {
+        Rocket_SetInnerRML( "No loading screen tips exist, are your pakfiles okay?", RP_EMOTICONS );
+    }
+    else
+    {
+        Rocket_SetInnerRML( tips[tip_choice].c_str(), RP_EMOTICONS );
+    }
 }
 
 static void CG_Rocket_HaveJetpck()
