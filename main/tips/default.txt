@@ -8,5 +8,14 @@ Unvanquished is a relatively complex game, and can be confusing at first. Try no
 Humans can buy and sell their upgrades at an armory on a whim, but cannot change equipment away from base.
 Aliens can evolve anywhere it's safe, but once evolved, only death will bring them back to a smaller class.
 Try not to use the same strategy every time. A smart enemy will memorize it and will be ready to ambush you.
-The rocket pod will not fire if it thinks its rocket will damage humans or the base. Try pointing it down long hallways.
+The rocket pod will not fire if it thinks its rocket will damage humans or the base. Don't put a turret in front of it, or it will never fire.
+Rocket pods fire exactly what you would think they fire, and are most effective when pointed down a long hallway.
 A trapper and an acid tube right above the door is an easy and effective alien defense. Watch out for grenades, however...
+"Feeding" refers to dying to the enemy over and over again without getting kills of your own. This gives the other team more momentum.
+Unvanquished is just a game, no matter how deeply you invest yourself in it.
+Your team can only have one central building (overmind or reactor). If it's destroyed, most of your buildings are disabled until you rebuild it.
+Beacons provide you and your team with valuable information. One of them is even a countdown timer, to help coordinate attacks.
+Nearly everything you do in the game can also be bound to any key on your keyboard. The same key can even do multiple actions, like buying favorite items.
+If you're low on health, a beacon will appear for you showing nearby places to heal. With any luck, there might even be base defenses.
+A good forward base usually includes a build point generator (drill or leech), a healing building (booster or medistation), and a couple of spawn buildings.
+If you like the spot so much, maybe you should put a base on it! Forward bases help keep pressure on the other team.
