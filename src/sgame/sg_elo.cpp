@@ -127,6 +127,8 @@ int elo_get_loadout_value( gentity_t *ply )
 
 void elo_calculate( gentity_t *winner, gentity_t *loser )
 {
+    if ( winner->client->pers.isFillerBot || loser->client->pers.isFillerBot ) { return; } // ignore bots
+
     int winner_elo = elo_get(winner->client->pers.admin);
     int loser_elo = elo_get(loser->client->pers.admin);
 
