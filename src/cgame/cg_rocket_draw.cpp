@@ -243,10 +243,10 @@ public:
 			case WP_ABUILD2:
 			case WP_HBUILD:
 				if ( builder &&
-				     spentBudget  == cg.snap->ps.persistant[ PERS_SPENTBUDGET ] &&
-				     markedBudget == cg.snap->ps.persistant[ PERS_MARKEDBUDGET ] &&
-				     totalBudget  == cg.snap->ps.persistant[ PERS_TOTALBUDGET ] &&
-				     queuedBudget == cg.snap->ps.persistant[ PERS_QUEUEDBUDGET ] )
+					 spentBudget  == cg.snap->ps.persistant[ PERS_SPENTBUDGET ] &&
+					 markedBudget == cg.snap->ps.persistant[ PERS_MARKEDBUDGET ] &&
+					 totalBudget  == cg.snap->ps.persistant[ PERS_TOTALBUDGET ] &&
+					 queuedBudget == cg.snap->ps.persistant[ PERS_QUEUEDBUDGET ] )
 				{
 					return;
 				}
@@ -255,7 +255,7 @@ public:
 				markedBudget = cg.snap->ps.persistant[ PERS_MARKEDBUDGET ];
 				totalBudget  = cg.snap->ps.persistant[ PERS_TOTALBUDGET ];
 				queuedBudget = cg.snap->ps.persistant[ PERS_QUEUEDBUDGET ];
-				builder      = true;
+				builder	  = true;
 
 				break;
 
@@ -264,7 +264,7 @@ public:
 				{
 					int maxAmmo = BG_Weapon( weapon )->maxAmmo;
 					if ( !builder &&
-					     ammo == cg.snap->ps.ammo + ( cg.snap->ps.clips * maxAmmo ) )
+						 ammo == cg.snap->ps.ammo + ( cg.snap->ps.clips * maxAmmo ) )
 					{
 						return;
 					}
@@ -274,7 +274,7 @@ public:
 				else
 				{
 					if ( !builder &&
-					     ammo == cg.snap->ps.ammo )
+						 ammo == cg.snap->ps.ammo )
 					{
 						return;
 					}
@@ -327,7 +327,7 @@ public:
 
 	virtual void DoOnRender()
 	{
-		int           value;
+		int		   value;
 		playerState_t *ps = &cg.snap->ps;
 
 		switch ( BG_PrimaryWeapon( ps->stats ) )
@@ -375,9 +375,9 @@ public:
 
 	void DoOnUpdate()
 	{
-		int        i, total;
-		int        fps;
-		int        t, frameTime;
+		int		i, total;
+		int		fps;
+		int		t, frameTime;
 
 		if ( !cg_drawFPS.integer && shouldShowFps )
 		{
@@ -448,13 +448,13 @@ public:
 
 	void DoOnRender()
 	{
-		rectDef_t    rect;
-		float        x, y, w, h, dim;
-		qhandle_t    indicator;
+		rectDef_t	rect;
+		float		x, y, w, h, dim;
+		qhandle_t	indicator;
 		Color::Color drawColor, baseColor;
-		weapon_t     weapon;
+		weapon_t	 weapon;
 		weaponInfo_t *wi;
-		bool     onRelevantEntity;
+		bool	 onRelevantEntity;
 
 		if ( ( !cg_drawCrosshairHit.integer && !cg_drawCrosshairFriendFoe.integer ) ||
 			cg.snap->ps.persistant[ PERS_SPECSTATE ] != SPECTATOR_NOT ||
@@ -559,12 +559,12 @@ public:
 
 	void DoOnRender()
 	{
-		rectDef_t    rect;
-		float        w, h;
-		qhandle_t    crosshair;
-		float        x, y;
+		rectDef_t	rect;
+		float		w, h;
+		qhandle_t	crosshair;
+		float		x, y;
 		weaponInfo_t *wi;
-		weapon_t     weapon;
+		weapon_t	 weapon;
 
 		weapon = BG_GetPlayerWeapon( &cg.snap->ps );
 
@@ -624,7 +624,7 @@ private:
 #define SPEEDOMETER_NUM_DISPLAYED_SAMPLES 160
 #define SPEEDOMETER_DRAW_TEXT   0x1
 #define SPEEDOMETER_DRAW_GRAPH  0x2
-#define SPEEDOMETER_IGNORE_Z    0x4
+#define SPEEDOMETER_IGNORE_Z	0x4
 float speedSamples[ SPEEDOMETER_NUM_SAMPLES ];
 int speedSampleTimes[ SPEEDOMETER_NUM_SAMPLES ];
 // array indices
@@ -643,7 +643,7 @@ void CG_AddSpeed()
 {
 	float  speed;
 	vec3_t vel;
-	int    windowTime;
+	int	windowTime;
 	bool newSpeedGteMaxSpeed, newSpeedGteMaxSpeedInWindow;
 
 	VectorCopy( cg.snap->ps.velocity, vel );
@@ -724,8 +724,8 @@ void CG_AddSpeed()
 }
 
 #define SPEEDOMETER_MIN_RANGE 900
-#define SPEED_MED             1000.f
-#define SPEED_FAST            1600.f
+#define SPEED_MED			 1000.f
+#define SPEED_FAST			1600.f
 
 class SpeedGraphElement : public HudElement
 {
@@ -766,13 +766,13 @@ public:
 
 	void DoOnRender()
 	{
-		int          i;
-		float        val, max, top;
+		int		  i;
+		float		val, max, top;
 		// colour of graph is interpolated between these values
 		const Color::Color slow = { 0.0, 0.0, 1.0 };
 		const Color::Color medium = { 0.0, 1.0, 0.0 };
 		const Color::Color fast = { 1.0, 0.0, 0.0 };
-		rectDef_t    rect;
+		rectDef_t	rect;
 
 		if ( !cg_drawSpeed.integer )
 		{
@@ -928,7 +928,7 @@ public:
 	void DoOnUpdate()
 	{
 		playerState_t *ps = &cg.snap->ps;
-		float         value = ps->stats[ STAT_STAMINA ];
+		float		 value = ps->stats[ STAT_STAMINA ];
 
 		if ( stamina != value )
 		{
@@ -953,7 +953,7 @@ public:
 	void DoOnUpdate()
 	{
 		playerState_t *ps;
-		weapon_t      newWeapon;
+		weapon_t	  newWeapon;
 
 		ps = &cg.snap->ps;
 		newWeapon = BG_GetPlayerWeapon( ps );
@@ -1046,8 +1046,8 @@ public:
 
 	void DoOnUpdate()
 	{
-		vec3_t        view, point;
-		trace_t       trace;
+		vec3_t		view, point;
+		trace_t	   trace;
 		entityState_t *es;
 
 		AngleVectors( cg.refdefViewAngles, view, nullptr, nullptr );
@@ -1227,7 +1227,7 @@ void CG_AddLagometerSnapshotInfo( snapshot_t *snap )
 {
 	static int previousPings[ PING_FRAMES ];
 	static int index;
-	int        i;
+	int		i;
 
 	// dropped packet
 	if ( !snap )
@@ -1267,8 +1267,8 @@ Should we draw something differnet for long lag vs no packets?
 */
 static void CG_Rocket_DrawDisconnect()
 {
-	float      x, y;
-	int        cmdNum;
+	float	  x, y;
+	int		cmdNum;
 	usercmd_t  cmd;
 
 	// draw the phone jack if we are completely past our buffers
@@ -1318,10 +1318,10 @@ public:
 
 	void DoOnRender()
 	{
-		int    a, i;
+		int	a, i;
 		float  v;
 		float  ax, ay, aw, ah, mid, range;
-		int    color;
+		int	color;
 		float  vscale;
 		rectDef_t rect;
 
@@ -1514,9 +1514,9 @@ CG_ScanForCrosshairEntity
 */
 static void CG_ScanForCrosshairEntity()
 {
-	trace_t       trace;
-	vec3_t        start, end;
-	team_t        ownTeam, targetTeam;
+	trace_t	   trace;
+	vec3_t		start, end;
+	team_t		ownTeam, targetTeam;
 	entityState_t *targetState;
 
 	if ( cg.snap == nullptr )
@@ -1525,7 +1525,7 @@ static void CG_ScanForCrosshairEntity()
 	}
 
 	cg.crosshairFriend = false;
-	cg.crosshairFoe    = false;
+	cg.crosshairFoe	= false;
 
 	VectorCopy( cg.refdef.vieworg, start );
 	VectorMA( start, 131072, cg.refdef.viewaxis[ 0 ], end );
@@ -2146,7 +2146,7 @@ public:
 
 				// Pick impossible value
 				lastDeltaEfficiencyPct = -999;
-				lastDeltaBudget        = -999;
+				lastDeltaBudget		= -999;
 			}
 		}
 		else
@@ -2173,29 +2173,29 @@ public:
 			// most significant byte of the de-facto short ps->stats[STAT_PREDICTION], respectively.
 			// The efficiency delta is a value between -1 and 1, the budget delta is an integer
 			// between -128 and 127.
-			float deltaEfficiency    = (float)(signed char)(ps->stats[STAT_PREDICTION] & 0xff) / (float)0x7f;
-			int   deltaBudget        = (int)(signed char)(ps->stats[STAT_PREDICTION] >> 8);
+			float deltaEfficiency	= (float)(signed char)(ps->stats[STAT_PREDICTION] & 0xff) / (float)0x7f;
+			int   deltaBudget		= (int)(signed char)(ps->stats[STAT_PREDICTION] >> 8);
 
 			int   deltaEfficiencyPct = (int)(deltaEfficiency * 100.0f);
 
 			if ( deltaEfficiencyPct != lastDeltaEfficiencyPct ||
-			     deltaBudget        != lastDeltaBudget )
+				 deltaBudget		!= lastDeltaBudget )
 			{
-				if        ( deltaBudget < 0 ) {
+				if		( deltaBudget < 0 ) {
 					color = Color::Red;
 					msg = va( "<span class='material-icon error'>&#xE000;</span> You are losing build points!"
-					          " Build the %s%s further apart for greater efficiency.",
-					          BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
+							  " Build the %s%s further apart for greater efficiency.",
+							  BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
 				} else if ( deltaBudget < cgs.buildPointBudgetPerMiner / 10 ) {
 					color = Color::Orange;
 					msg = va( "<span class='material-icon warning'>&#xE002;</span> Minimal build point gain."
-					          " Build the %s%s further apart for greater efficiency.",
-					          BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
+							  " Build the %s%s further apart for greater efficiency.",
+							  BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
 				} else if ( deltaBudget < cgs.buildPointBudgetPerMiner / 2 ) {
 					color = Color::Yellow;
 					msg = va( "<span class='material-icon warning'>&#xE002;</span> Subpar build point gain."
-					          " Build the %s%s further apart for greater efficiency.",
-					          BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
+							  " Build the %s%s further apart for greater efficiency.",
+							  BG_Buildable( buildable )->humanName, pluralSuffix[ buildable ].c_str() );
 				} else {
 					color = Color::Green;
 				}
@@ -2217,7 +2217,7 @@ public:
 				));
 
 				lastDeltaEfficiencyPct = deltaEfficiencyPct;
-				lastDeltaBudget        = deltaBudget;
+				lastDeltaBudget		= deltaBudget;
 			}
 		}
 	}
@@ -2333,7 +2333,7 @@ private:
 	{
 		float timeElapsed = ( cg.time - t0 ) / 1000.0f; // in s
 		float frequency = (float)LEVEL3_BOUNCEBALL_REGEN_CREEP
-		                / (float)regenerationInterval; // in Hz
+						/ (float)regenerationInterval; // in Hz
 		return offset + 2.0f * M_PI * frequency * timeElapsed;
 	}
 
@@ -2360,7 +2360,7 @@ void CG_Rocket_DrawPlayerHealthCross()
 {
 	qhandle_t shader;
 	Color::Color ref_color;
-	float     ref_alpha;
+	float	 ref_alpha;
 	rectDef_t rect;
 	Color::Color color;
 
@@ -2461,17 +2461,17 @@ into a single progress bar.
 ============
 */
 
-#define LALIGN_TOPLEFT     0
-#define LALIGN_CENTER      1
+#define LALIGN_TOPLEFT	 0
+#define LALIGN_CENTER	  1
 #define LALIGN_BOTTOMRIGHT 2
 
 static void CG_DrawStack( rectDef_t *rect, const Color::Color& color, float fill,
 						  int align, float val, int max )
 {
-	int      i;
-	float    each, frac;
-	float    nudge;
-	float    fmax = max; // we don't want integer division
+	int	  i;
+	float	each, frac;
+	float	nudge;
+	float	fmax = max; // we don't want integer division
 	bool vertical; // a stack taller than it is wide is drawn vertically
 
 	// so that the vertical and horizontal bars can share code, abstract the
@@ -2637,13 +2637,13 @@ static void CG_DrawStack( rectDef_t *rect, const Color::Color& color, float fill
 
 static void CG_DrawPlayerAmmoStack()
 {
-	float         val;
-	int           maxVal, align;
-	static int    lastws, maxwt, lastval, valdiff;
+	float		 val;
+	int		   maxVal, align;
+	static int	lastws, maxwt, lastval, valdiff;
 	playerState_t *ps = &cg.snap->ps;
-	weapon_t      primary = BG_PrimaryWeapon( ps->stats );
+	weapon_t	  primary = BG_PrimaryWeapon( ps->stats );
 	Color::Color  localColor, foreColor;
-	rectDef_t     rect;
+	rectDef_t	 rect;
 	static char   buf[ 100 ];
 
 	// grab info from libRocket
@@ -2741,11 +2741,11 @@ static void CG_DrawPlayerAmmoStack()
 
 static void CG_DrawPlayerClipsStack()
 {
-	float         val;
-	int           maxVal;
-	static int    lastws, maxwt;
+	float		 val;
+	int		   maxVal;
+	static int	lastws, maxwt;
 	playerState_t *ps = &cg.snap->ps;
-	rectDef_t      rect;
+	rectDef_t	  rect;
 	Color::Color   foreColor;
 
 	// grab info from libRocket
@@ -2789,7 +2789,7 @@ void CG_Rocket_DrawMinimap()
 	if ( cg.minimap.defined )
 	{
 		Color::Color foreColor;
-		rectDef_t    rect;
+		rectDef_t	rect;
 
 		// grab info from libRocket
 		CG_GetRocketElementColor( foreColor );
@@ -2829,7 +2829,7 @@ void CG_Rocket_DrawFollow()
 
 void CG_Rocket_DrawConnectText()
 {
-	char       rml[ MAX_STRING_CHARS ];
+	char	   rml[ MAX_STRING_CHARS ];
 	const char *s;
 
 	if ( !Q_stricmp( rocketInfo.cstate.servername, "localhost" ) )
@@ -2879,7 +2879,7 @@ void CG_Rocket_DrawConnectText()
 
 void CG_Rocket_DrawClock()
 {
-	char    *s;
+	char	*s;
 	qtime_t qt;
 
 	if ( !cg_drawClock.integer )
@@ -2975,20 +2975,20 @@ void CG_Rocket_DrawChatType()
 static void CG_Rocket_DrawPlayerMomentumBar()
 {
 	// data
-	rectDef_t     rect;
+	rectDef_t	 rect;
 	Color::Color  foreColor, backColor, lockedColor, unlockedColor;
 	playerState_t *ps;
-	float         momentum, rawFraction, fraction, glowFraction, glowOffset, borderSize;
-	int           threshold;
-	team_t        team;
-	bool      unlocked;
+	float		 momentum, rawFraction, fraction, glowFraction, glowOffset, borderSize;
+	int		   threshold;
+	team_t		team;
+	bool	  unlocked;
 
 	momentumThresholdIterator_t unlockableIter = { -1, 0 };
 
 	// display
 	Color::Color  color;
-	float         x, y, w, h, b, glowStrength;
-	bool      vertical;
+	float		 x, y, w, h, b, glowStrength;
+	bool	  vertical;
 
 	CG_GetRocketElementRect( &rect );
 	CG_GetRocketElementBGColor( backColor );
@@ -3115,12 +3115,12 @@ void CG_Rocket_DrawMineRate()
 	if (queuedBudget != 0) {
 		float matchTime = (float)(cg.time - cgs.levelStartTime);
 		float rate = cgs.buildPointRecoveryInitialRate /
-		             std::pow(2.0f, matchTime / (60000.0f * cgs.buildPointRecoveryRateHalfLife));
+					 std::pow(2.0f, matchTime / (60000.0f * cgs.buildPointRecoveryRateHalfLife));
 		Rocket_SetInnerRML( va( "Recovering %d / %d BP @ %.1f BP/min.",
-		                        queuedBudget, totalBudget, rate), 0 );
+								queuedBudget, totalBudget, rate), 0 );
 	} else {
 		Rocket_SetInnerRML( va( "The full budget of %d BP is available.",
-		                        totalBudget), 0 );
+								totalBudget), 0 );
 	}
 }
 
@@ -3142,26 +3142,26 @@ static INLINE qhandle_t CG_GetUnlockableIcon( int num )
 		case UNLT_CLASS:
 			return cg_classes[ index ].classIcon;
 
-        default:
-            return 0;
+		default:
+			return 0;
 	}
 }
 
 static void CG_Rocket_DrawPlayerUnlockedItems()
 {
-	rectDef_t     rect;
+	rectDef_t	 rect;
 	Color::Color  foreColour, backColour;
 	momentumThresholdIterator_t unlockableIter = { -1, 1 }, previousIter;
 
 	// data
-	team_t    team;
+	team_t	team;
 
 	// display
-	float     x, y, w, h, iw, ih, borderSize;
+	float	 x, y, w, h, iw, ih, borderSize;
 	bool  vertical;
 
-	int       icons, counts;
-	int       count[ 32 ] = { 0 };
+	int	   icons, counts;
+	int	   count[ 32 ] = { 0 };
 	struct
 	{
 		qhandle_t shader;
@@ -3191,7 +3191,7 @@ static void CG_Rocket_DrawPlayerUnlockedItems()
 	for ( ;; )
 	{
 		qhandle_t shader;
-		int       threshold;
+		int	   threshold;
 		bool  unlocked;
 
 		previousIter = unlockableIter;
@@ -3296,7 +3296,7 @@ static void CG_Rocket_DrawPlayerUnlockedItems()
 static void CG_Rocket_DrawVote_internal( team_t team )
 {
 	char   *s;
-	int    sec;
+	int	sec;
 
 	if ( !cgs.voteTime[ team ] )
 	{
@@ -3322,8 +3322,8 @@ static void CG_Rocket_DrawVote_internal( team_t team )
 	Rocket::Core::String nokey = CG_KeyBinding( va( "%svote no", team == TEAM_NONE ? "" : "team" ), team );
 
 	s = va( "%sVOTE(%i): %s\n"
-			"    Called by: \"%s\"\n"
-			"    [%s][<span class='material-icon'>&#xe8dc;</span>]:%i [%s][<span class='material-icon'>&#xe8db;</span>]:%i\n",
+			"	Called by: \"%s\"\n"
+			"	[%s][<span class='material-icon'>&#xe8dc;</span>]:%i [%s][<span class='material-icon'>&#xe8db;</span>]:%i\n",
 			team == TEAM_NONE ? "" : "TEAM", sec, cgs.voteString[ team ],
 			cgs.voteCaller[ team ], yeskey.CString(), cgs.voteYes[ team ], nokey.CString(), cgs.voteNo[ team ] );
 
@@ -3342,7 +3342,7 @@ static void CG_Rocket_DrawTeamVote()
 
 static void CG_Rocket_DrawSpawnQueuePosition()
 {
-	int    position;
+	int	position;
 	const char *s;
 
 	if ( !( cg.snap->ps.pm_flags & PMF_QUEUED ) )
@@ -3374,7 +3374,7 @@ static void CG_Rocket_DrawSpawnQueuePosition()
 
 static void CG_Rocket_DrawNumSpawns()
 {
-	int    position, spawns;
+	int	position, spawns;
 	const char *s;
 
 	if ( !( cg.snap->ps.pm_flags & PMF_QUEUED ) )
@@ -3441,7 +3441,7 @@ static void CG_Rocket_DrawLevelName()
 static void CG_Rocket_DrawMOTD()
 {
 	const char *s;
-	char       parsed[ MAX_STRING_CHARS ];
+	char	   parsed[ MAX_STRING_CHARS ];
 
 	s = CG_ConfigString( CS_MOTD );
 	Q_ParseNewlines( parsed, s, sizeof( parsed ) );
@@ -3565,51 +3565,74 @@ static void CG_Rocket_DrawDownloadSpeed()
 }
 
 // FIXME: it might be wise to throw out the vector full of strings and
-//        only keep the chosen tip in memory
+//		only keep the chosen tip in memory
 static std::vector<std::string> tips;
 static int tip_choice;
 static bool tips_initialized = false;
 
 static void CG_Init_Tips()
 {
-    if ( tips_initialized ) { return; } // do only once per vm initialization
+	if ( tips_initialized ) { return; } // do only once per vm initialization
 
-    // make sure it exists
-    if ( FS::PakPath::FileExists("tips/default.txt") )
-    {
-        std::string infile = FS::PakPath::ReadFile("tips/default.txt");
-        std::string newtip;
-        size_t curpos = 0;
-        while ( ( curpos = infile.find('\n') ) != std::string::npos )
-        {
-            // split by \n
-            newtip = infile.substr(0, curpos);
-            tips.push_back(newtip);
+	char language[ 32 ];
+	trap_Cvar_VariableStringBuffer( "language", language, sizeof( language ) );
+	Log::Debug( "CG_Init_Tips: language = %s", language );
 
-            // erase from buffer
-            infile.erase(0, curpos + 1);
-        }
-    }
-    
-    // TODO: per-map tips
+	std::string tipfile_default; // this will change if successful
+	std::string tipfile_default_l10n;
 
-    tip_choice = rand() / (RAND_MAX / tips.size() + 1);
-    tips_initialized = true;
+	// this would set tipfile_default_l10n to "tips/default_en.txt", assuming language is "en"
+    char tipfile_default_l10n_cstr[ 32 ];
+    sprintf( tipfile_default_l10n_cstr, "tips/default_%s.txt", language );
+    tipfile_default_l10n = std::string( tipfile_default_l10n_cstr );
+
+	if ( FS::PakPath::FileExists( tipfile_default_l10n ) )
+	{
+		tipfile_default = tipfile_default_l10n;
+	}
+	else if ( FS::PakPath::FileExists( "tips/default.txt" ) )
+	{
+		// fallback to just "tips/default.txt" in case of older LTWS packs
+		tipfile_default = "tips/default.txt";
+		// ...but complain about it because come on bro
+		Log::Warn( "Default tips file contains no localization tag" );
+	}
+
+	if ( !tipfile_default.empty() ) {
+		Log::Debug( "CG_Init_Tips: default tip file found: %s", tipfile_default );
+		std::string infile = FS::PakPath::ReadFile( tipfile_default );
+		std::string newtip;
+		size_t curpos = 0;
+		while ( ( curpos = infile.find('\n') ) != std::string::npos )
+		{
+			// split by \n
+			newtip = infile.substr(0, curpos);
+			tips.push_back(newtip);
+
+			// erase from buffer
+			infile.erase(0, curpos + 1);
+		}
+	}
+	
+	// TODO: per-map tips
+
+	tip_choice = rand() / (RAND_MAX / tips.size() + 1);
+	tips_initialized = true;
 }
-    
+	
 
 static void CG_Rocket_DrawTip()
 {
-    CG_Init_Tips();
+	CG_Init_Tips();
 
-    if ( tips.empty() )
-    {
-        Rocket_SetInnerRML( "No loading screen tips exist, are your pakfiles okay?", RP_EMOTICONS );
-    }
-    else
-    {
-        Rocket_SetInnerRML( tips[tip_choice].c_str(), RP_EMOTICONS );
-    }
+	if ( tips.empty() )
+	{
+		Rocket_SetInnerRML( "No loading screen tips exist, are your pakfiles okay?", RP_EMOTICONS );
+	}
+	else
+	{
+		Rocket_SetInnerRML( tips[tip_choice].c_str(), RP_EMOTICONS );
+	}
 }
 
 static void CG_Rocket_HaveJetpck()
@@ -3655,7 +3678,7 @@ static const elementRenderCmd_t elementRenderCmdList[] =
 	{ "progress_value", &CG_Rocket_DrawProgressValue, ELEMENT_ALL },
 	{ "spawnPos", &CG_Rocket_DrawSpawnQueuePosition, ELEMENT_DEAD },
 	{ "stamina_bolt", &CG_Rocket_DrawStaminaBolt, ELEMENT_HUMANS },
-    { "tip", &CG_Rocket_DrawTip, ELEMENT_ALL },
+	{ "tip", &CG_Rocket_DrawTip, ELEMENT_ALL },
 	{ "tutorial", &CG_Rocket_DrawTutorial, ELEMENT_GAME },
 	{ "unlocked_items", &CG_Rocket_DrawPlayerUnlockedItems, ELEMENT_BOTH },
 	{ "votes", &CG_Rocket_DrawVote, ELEMENT_GAME },
