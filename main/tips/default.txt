@@ -19,3 +19,4 @@ Nearly everything you do in the game can also be bound to any key on your keyboa
 If you're low on health, a beacon will appear for you showing nearby places to heal. With any luck, there might even be base defenses.
 A good forward base usually includes a build point generator (drill or leech), a healing building (booster or medistation), and a couple of spawn buildings.
 If you like the spot so much, maybe you should put a base on it! Forward bases help keep pressure on the other team.
+A map may have its own hazards, such as long falls or toxic waste. Watch your step, and mind the gaps.

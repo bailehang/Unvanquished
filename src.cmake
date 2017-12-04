@@ -43,6 +43,7 @@ set(CGAMELIST
     ${GAMELOGIC_DIR}/cgame/cg_segmented_skeleton.h
     ${GAMELOGIC_DIR}/cgame/cg_servercmds.cpp
     ${GAMELOGIC_DIR}/cgame/cg_snapshot.cpp
+    ${GAMELOGIC_DIR}/cgame/cg_tips.cpp
     ${GAMELOGIC_DIR}/cgame/cg_trails.cpp
     ${GAMELOGIC_DIR}/cgame/cg_tutorial.cpp
     ${GAMELOGIC_DIR}/cgame/cg_ui.h
