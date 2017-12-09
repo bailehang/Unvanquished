@@ -4332,6 +4332,7 @@ static const commands_t cmds[] =
 	{ "class",           CMD_TEAM,                            Cmd_Class_f            },
 	{ "damage",          CMD_CHEAT | CMD_ALIVE,               Cmd_Damage_f           },
 	{ "deconstruct",     CMD_TEAM | CMD_ALIVE,                Cmd_Deconstruct_f      },
+    { "elo_dbg_printinventoryvalue", 0,                       Cmd_elo_dbg_printinventoryvalue },
 	{ "follow",          CMD_SPEC,                            Cmd_Follow_f           },
 	{ "follownext",      CMD_SPEC,                            Cmd_FollowCycle_f      },
 	{ "followprev",      CMD_SPEC,                            Cmd_FollowCycle_f      },
