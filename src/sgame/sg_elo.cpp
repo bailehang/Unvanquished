@@ -20,7 +20,7 @@ int elo_get( g_admin_admin_t *a )
 int elo_get_loadout_value( gentity_t *ply )
 {
     int score;
-    switch ( ply->client->ps.weapon )
+    /*switch ( ply->client->ps.weapon )
     {
 		case WP_ALEVEL1:
             // basi
@@ -121,7 +121,104 @@ int elo_get_loadout_value( gentity_t *ply )
             Log::Warn("unrecognized weapon for %s", ply->client->pers.netname);
             score = 0;
 			break;
+    }*/
+    if ( ply->client->pers.team == TEAM_HUMANS )
+    {
+        for ( int cur_weapon = WP_NONE + 1; cur_weapon < WP_NUM_WEAPONS; cur_weapon++ )
+        {
+            int weaponvalue;
+            switch ( cur_weapon )
+            {
+	        	case WP_MACHINEGUN:
+                    weaponvalue = 0;
+	        		break;
+
+	        	case WP_SHOTGUN:
+                    weaponvalue = 150;
+	        		break;
+
+	        	case WP_CHAINGUN:
+                    weaponvalue = 400;
+	        		break;
+
+	        	case WP_FLAMER:
+                    weaponvalue = 450;
+	        		break;
+
+	        	case WP_PULSE_RIFLE:
+                    weaponvalue = 500;
+	        		break;
+
+	        	case WP_MASS_DRIVER:
+                    weaponvalue = 400;
+	        		break;
+
+	        	case WP_LUCIFER_CANNON:
+                    weaponvalue = 1000;
+	        		break;
+
+	        	case WP_LAS_GUN:
+                    weaponvalue = 200;
+	        		break;
+
+	        	case WP_PAIN_SAW:
+                    weaponvalue = 200;
+	        		break;
+
+                default:
+                    Log::Warn("human player %s^3 has an unrecognized weapon (%d)", ply->client->pers.netname, cur_weapon);
+                    weaponvalue = 0;
+            }
+            if ( BG_InventoryContainsWeapon( cur_weapon, ply->client->ps.stats ) )
+            {
+                score = score + weaponvalue;
+            }
+        }
+
+        for ( int cur_upgrade = UP_NONE + 1; cur_upgrade < UP_NUM_UPGRADES; cur_upgrade++ )
+        {
+            int upgradevalue;
+            switch ( cur_upgrade )
+            {
+                case UP_LIGHTARMOUR:
+                    upgradevalue = 150;
+                    break;
+                case UP_MEDIUMARMOUR:
+                    upgradevalue = 250;
+                    break;
+                case UP_BATTLESUIT:
+                    upgradevalue = 400;
+                    break;
+                case UP_RADAR:
+                    upgradevalue = 100;
+                    break;
+                case UP_JETPACK:
+                    upgradevalue = 150;
+                    break;
+                case UP_GRENADE:
+                    upgradevalue = 200;
+                    break;
+                case UP_FIREBOMB:
+                    upgradevalue = 200;
+                    break;
+                case UP_MEDKIT:
+                    upgradevalue = 0; // don't count medkits
+                    break;
+                default:
+                    Log::Warn("human player %s has an unrecognized upgrade (%d)", ply->client->pers.netname, cur_upgrade);
+                    upgradevalue = 0;
+            }
+            if ( BG_InventoryContainsUpgrade( cur_upgrade, ply->client->ps.stats ) )
+            {
+                score = score + upgradevalue;
+            }
+        }
     }
+    else if ( ply->client->pers.team == TEAM_ALIENS )
+    {
+        Log::Warn("FIXME: alien elo adjustments are not yet implemented");
+    }
+
     return score;
 }
 
@@ -166,4 +263,40 @@ void elo_calculate( gentity_t *winner, gentity_t *loser )
         winner->client->pers.admin->elo = winner_score;
         loser->client->pers.admin->elo = loser_score;
     }
+}
+
+void Cmd_elo_dbg_printinventoryvalue( gentity_t *ply )
+{
+    // get target name from argv[1]
+    char tgtname[ MAX_TOKEN_CHARS ];
+    trap_Argv( 1, tgtname, sizeof( tgtname ) ); 
+
+    if ( !tgtname[0] )
+    {
+        // user did not supply args
+        trap_SendServerCommand( ply - g_entities,
+            va( "print_tr %s", QQ( N_("^3elo_dbg_printinventoryvalue: ^*this command requires a target name") ) ) // so lets bitch about it
+        );
+        return;
+    }
+
+    char err[ MAX_STRING_CHARS ];
+    int tgtid = G_ClientNumberFromString( tgtname, err, sizeof( err ) );
+    if ( tgtid == -1 )
+    {
+        G_admin_print( ply, va( "%s %s",
+            QQ( N_( "^3elo_dbg_printinventoryvalue: ^*$1$" ) ),
+            err
+        ) );
+        return;
+    }
+
+    // we have our target player
+    gentity_t* target = &g_entities[tgtid];
+    int loadout_value = elo_get_loadout_value( target );
+    G_admin_print( ply, va( "%s %s %d",
+        QQ( N_( "^3elo_dbg_printinventoryvalue: ^*$1$^*'s inventory is worth around $2$, according to our experts" ) ),
+        Quote( ( target ) ? target->client->pers.netname : "a paranormal ghost" ),
+        loadout_value
+    ) );
 }
