@@ -238,10 +238,14 @@ void elo_calculate( gentity_t *winner, gentity_t *loser )
     // reduce kfactor if player loadouts are unbalanced
     // a tyrant killing a nude human shouldn't have the same elo bonus
     // as a dretch killing a chainsuit
+    // FIXME: results in bizarre negative elos for some reason, need to debug
     int effective_kfactor = elo_kfactor.integer;
+    /*
     int winner_loadout_score = elo_get_loadout_value(winner);
     int loser_loadout_score = elo_get_loadout_value(loser);
     effective_kfactor = elo_kfactor.integer - ( ( winner_loadout_score - loser_loadout_score ) / elo_kfactor.integer );
+    Log::Debug("Effective K-factor for this kill is %d", effective_kfactor);
+    */
 
     int winner_score = winner_elo + effective_kfactor * (1 - winner_expected);
     int loser_score = loser_elo + effective_kfactor * (0 - loser_expected);
